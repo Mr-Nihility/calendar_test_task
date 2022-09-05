@@ -1,0 +1,94 @@
+.backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  transition: opacity 500ms ease-out 0.2s, visibility 500ms ease-out;
+}
+
+.modal {
+  position: absolute;
+  background-color: var(--bg-color);
+  width: 400px;
+  height: 70vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.clsBtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  color: inherit;
+}
+
+.form {
+  padding: 50px;
+}
+.title {
+  display: block;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+.subtitle {
+  display: block;
+}
+.inputWrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 80px;
+}
+
+.input,
+.descr,
+.inputDate,
+.inputTime {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: inherit;
+  color: inherit;
+  outline: none;
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--text-color);
+}
+.descr {
+  resize: none;
+}
+.inputDate {
+  display: inline-block;
+}
+.inputTime {
+  display: inline-block;
+  width: 100px;
+}
+
+.submitBtn {
+  display: block;
+  margin-left: auto;
+  margin-right: 30px;
+  padding: 10px 20px;
+  background-color: rgb(50, 137, 137);
+  color: inherit;
+  border-radius: 4px;
+  border: transparent;
+}
+
+.submitBtn:invalid {
+  background-color: transparent;
+}

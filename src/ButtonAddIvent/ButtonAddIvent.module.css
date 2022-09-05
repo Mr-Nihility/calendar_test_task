@@ -1,0 +1,12 @@
+.btn {
+  display: inline-block;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: royalblue;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
