@@ -87,7 +87,9 @@ export default function EventForm({
           </svg>
         </button>
         <form className={styles.form} onSubmit={handlerSubmit}>
-          <b className={styles.title}>Add new event</b>
+          <b className={styles.title}>
+            {event ? `Edit event` : `Add new event`}
+          </b>
           {event && (
             <span className={styles.subtext}>
               Created at : {event.createdAt}
