@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import ButtonAddIvent from "../ButtonAddIvent/ButtonAddIvent";
-import DatePickerSection from "../DatePickerSection/DatePickerSection";
-import EventForm from "../EventForm/EventForm";
-import styles from "./Header.module.css";
-import { useDispatch } from "react-redux";
-import { addEvent } from "../redux/events/events-slice";
+import React, { useState } from 'react';
+import ButtonAddIvent from '../ButtonAddIvent/ButtonAddIvent';
+import DatePickerSection from '../DatePickerSection/DatePickerSection';
+import EventForm from '../EventForm/EventForm';
+import styles from './Header.module.css';
+import { useDispatch } from 'react-redux';
+import { addEvent } from '../redux/events/events-slice';
+//--
 //---------------------------------------------------------------------------//
 export default function Header() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function Header() {
     setModalIsOpen(false);
   };
 
-  const addSubmit = (data) => {
+  const addSubmit = data => {
     dispatch(addEvent(data));
   };
   return (
