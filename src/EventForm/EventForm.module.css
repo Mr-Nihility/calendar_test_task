@@ -17,10 +17,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 8px;
 }
 
 .clsBtn {
   position: absolute;
+  width: 20px;
+  height: 20px;
   right: 5px;
   top: 5px;
   background-color: transparent;
@@ -28,6 +31,9 @@
   outline: none;
   border-radius: 50%;
   color: inherit;
+}
+.clsBtn:hover {
+  background-color: rgb(195, 69, 69);
 }
 
 .form {
@@ -45,6 +51,7 @@
   margin-bottom: 20px;
 }
 .subtitle {
+  font-size: 12px;
   display: block;
 }
 .inputWrap {
@@ -77,18 +84,40 @@
   display: inline-block;
   width: 100px;
 }
+.btnwrap {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 
 .submitBtn {
-  display: block;
-  margin-left: auto;
-  margin-right: 30px;
+  display: inline-block;
+
   padding: 10px 20px;
   background-color: rgb(50, 137, 137);
   color: inherit;
   border-radius: 4px;
   border: transparent;
+  transition: all 250ms linear;
+}
+.submitBtn:hover {
+  background-color: rgb(46, 88, 88);
 }
 
 .submitBtn:invalid {
   background-color: transparent;
+}
+
+.delBtn {
+  display: inline-block;
+
+  padding: 10px 10px;
+  background-color: rgb(237, 94, 61);
+  color: inherit;
+  border-radius: 4px;
+  border: transparent;
+  transition: all 250ms linear;
+}
+.delBtn:hover {
+  background-color: rgb(116, 46, 31);
 }

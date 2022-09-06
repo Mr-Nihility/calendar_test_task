@@ -16,14 +16,24 @@
   display: flex;
   justify-content: space-between;
 }
+
 .eventlist {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
+  overflow: auto;
+  height: 80%;
+
+  scrollbar-width: thin;
 }
 
-.eventItem {
-  font-size: 10px;
-  background-color: #00ea9c66;
-  border-radius: 2px;
+.eventlist::-webkit-scrollbar {
+  width: 4px;
+}
+.eventlist::-webkit-scrollbar-track {
+  background: rgba(53, 57, 51, 0.23);
+}
+.eventlist::-webkit-scrollbar-thumb {
+  background-color: #9af1d466;
+  border-radius: 20px;
 }

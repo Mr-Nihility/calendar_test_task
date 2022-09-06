@@ -12,16 +12,18 @@ const eventsSlice = createSlice({
     addEvent: (state, action) => {
       state.events.push(action.payload);
     },
-    editEvent: (state, action) => {
+    editEvent: (state, { payload }) => {
       state.events = state.events.map(item => {
-        if (item.id === action.payload.id) {
-          return { ...item, ...action.payload };
+        if (item.id === payload.id) {
+          return { ...item, ...payload };
+        } else {
+          return item;
         }
-        return item;
       });
     },
-    deleteEvent: (state, payload) => {
-      state.events = state.events.filter(item => item.id === payload);
+    deleteEvent: (state, { payload }) => {
+      console.log(payload);
+      state.events = state.events.filter(item => item.id !== payload);
     },
   },
 });
