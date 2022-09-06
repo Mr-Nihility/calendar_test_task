@@ -17,9 +17,8 @@ export default function EventForm({
   const [description, setDescription] = useState(
     event ? event.description : ''
   );
-  const [date, setDate] = useState(event ? new Date(event.date) : new Date());
 
-  // console.log(moment(event.date).format('MM.DD.YYYY'));
+  const [date, setDate] = useState(event ? new Date(event.date) : new Date());
 
   const [time, setTime] = useState(
     event ? new Date(moment(`${event.date} ${event.time}`)) : new Date()
@@ -62,6 +61,7 @@ export default function EventForm({
         break;
     }
   };
+
   const handlerSubmit = e => {
     e.preventDefault();
     const eventData = {
