@@ -31,6 +31,7 @@
   border: none;
   cursor: pointer;
   font-weight: 700;
+  transition: all 250ms linear;
 }
 .gotoday:hover {
   color: royalblue;
