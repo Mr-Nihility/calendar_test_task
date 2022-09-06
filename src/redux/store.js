@@ -1,8 +1,8 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import storage from "redux-persist/lib/storage";
+import storage from 'redux-persist/lib/storage';
 
-import eventsReducer from "./events/events-slice";
+import eventsReducer from './events/events-slice';
 //--------------------------------------------------------------------------//
 
 import {
@@ -14,18 +14,16 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
+} from 'redux-persist';
 
 const persistConfigAuth = {
-  key: "events",
+  key: 'events',
   storage,
   // whitelist: ["accessToken", "refreshToken", "sid", "userData"],
 };
 
 const store = configureStore({
-  reducer: {
-    date: persistReducer(persistConfigAuth, eventsReducer),
-  },
+  reducer: persistReducer(persistConfigAuth, eventsReducer),
 
   middleware: getDefaultMiddleware({
     serializableCheck: {

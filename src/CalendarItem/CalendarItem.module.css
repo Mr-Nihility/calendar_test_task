@@ -8,14 +8,22 @@
 }
 .calendarItem:hover {
   transform: scale(1.01);
-  border: 1px solid rgb(50, 137, 137);
-  background-color: rgb(49, 83, 83);
+  border: 1px solid #328989;
+  background-color: #315353;
 }
 
 .calendarMeta {
   display: flex;
   justify-content: space-between;
 }
+.eventlist {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 
-.eventList {
+.eventItem {
+  font-size: 10px;
+  background-color: #00ea9c66;
+  border-radius: 2px;
 }
