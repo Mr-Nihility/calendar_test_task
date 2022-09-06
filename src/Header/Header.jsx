@@ -5,7 +5,7 @@ import EventForm from '../EventForm/EventForm';
 import styles from './Header.module.css';
 import { useDispatch } from 'react-redux';
 import { addEvent } from '../redux/events/events-slice';
-//--
+
 //---------------------------------------------------------------------------//
 export default function Header() {
   const dispatch = useDispatch();
