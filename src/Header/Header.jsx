@@ -19,6 +19,7 @@ export default function Header() {
   };
 
   const addSubmit = data => {
+    data.createdAt = moment().format('D.M.YYYY HH:mm');
     dispatch(addEvent(data));
   };
 

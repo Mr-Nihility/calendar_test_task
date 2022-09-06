@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { getSelectedDate } from 'redux/events/events-selectors';
 import svg from '../assets/icons.svg';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 //------------------------------------------//
 export default function EventForm({
   onClose,
@@ -15,11 +17,7 @@ export default function EventForm({
   delEvent = null,
 }) {
   const selectedDate = useSelector(getSelectedDate);
-  //state
-  const [title, setTitle] = useState(event ? event.title : '');
-  const [description, setDescription] = useState(
-    event ? event.description : ''
-  );
+  ///////////////////////////////////////////state
   const [date, setDate] = useState(
     event ? new Date(event.date) : new Date(selectedDate)
   );
@@ -29,7 +27,7 @@ export default function EventForm({
       : new Date(selectedDate)
   );
 
-  //use 1
+  /////////////////////////////////////////////useEff close modal
   useEffect(() => {
     const handlCloseEsc = e => {
       if (e.keyCode === 27) {
@@ -47,36 +45,29 @@ export default function EventForm({
       onClose();
     }
   };
-
-  const handlerChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'title':
-        setTitle(value);
-        break;
-      case 'description':
-        setDescription(value);
-        break;
-      default:
-        break;
-    }
-  };
-
+  /////////////////////////////////////////////sumbit
   const handlerSubmit = e => {
     e.preventDefault();
+    const { title, description } = e.target.elements;
     const eventData = {
-      title,
-      description,
+      title: title.value,
+      description: description.value,
       date: moment(date).format('MM/DD/YYYY'),
       time: moment(time).format('HH:mm'),
-      createdAt: event ? event.createdAt : moment().format('D.M.YYYY HH:mm'),
+
       id: event ? event.id : nanoid(),
     };
-    console.log(eventData);
-
     handlerForm(eventData);
     onClose();
   };
+
+  ////////////////////////////////////////////////validation/////////////////////////////////////////////////////
+  const validationSchema = Yup.object().shape({
+    title: Yup.string()
+      .min(3, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+  });
 
   return ReactDOM.createPortal(
     <div className={styles.backdrop} onClick={handleOnBackDrop}>
@@ -86,86 +77,108 @@ export default function EventForm({
             <use href={`${svg}#icon-close`}></use>
           </svg>
         </button>
-        <form className={styles.form} onSubmit={handlerSubmit}>
-          <b className={styles.title}>
-            {event ? `Edit event` : `Add new event`}
-          </b>
-          {event && (
-            <span className={styles.subtext}>
-              Created at : {event.createdAt}
-            </span>
-          )}
-          {event?.updatedAt && (
-            <span className={styles.subtext}>
-              Updated at : {event.updatedAt}
-            </span>
-          )}
-          <label className={styles.label}>
-            Title*
-            <input
-              type="text"
-              className={styles.input}
-              name="title"
-              value={title}
-              onChange={handlerChange}
-              required
-            />
-          </label>
-          <label className={styles.label}>
-            Description
-            <textarea
-              type="text"
-              className={styles.descr}
-              name="description"
-              value={description}
-              onChange={handlerChange}
-            />
-          </label>
-          <div className={styles.inputWrap}>
-            <label className={styles.label}>
-              <span className={styles.subtitle}>Date*</span>
-              <DatePicker
-                className={styles.inputDate}
-                selected={date}
-                // dateFormat="MM/dd/yyyy"
-                onChange={selectedDate => setDate(selectedDate)}
-                required
-              />
-            </label>
-            <label className={`${styles.label} ${styles.labelTime}`}>
-              <span className={styles.subtitle}>Begin time</span>
-              <svg className={styles.iconclock} width="15" height="15">
-                <use href={`${svg}#icon-clock`}></use>
-              </svg>
-              <DatePicker
-                selected={time}
-                className={styles.inputTime}
-                onChange={selectedTime => setTime(selectedTime)}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={30}
-                timeCaption="Time"
-                dateFormat="HH:mm"
-              />
-            </label>
-          </div>
-          <div className={styles.btnwrap}>
-            {event && (
-              <button
-                type="button"
-                className={styles.delBtn}
-                onClick={() => delEvent(event.id)}
-              >
-                <svg className={styles.icondelete} width="20" height="20">
-                  <use href={`${svg}#icon-trash`}></use>
-                </svg>
-              </button>
-            )}
-            <button type="submit" className={styles.submitBtn}>
-              SAVE
-            </button>
-          </div>
-        </form>
+        <Formik
+          initialValues={{
+            title: event ? event.title : '',
+            description: event ? event.description : '',
+          }}
+          validationSchema={validationSchema}
+          validateOnChange
+        >
+          {({ errors, touched, isValid, handleChange, values }) => {
+            return (
+              <Form className={styles.form} onSubmit={handlerSubmit}>
+                <b className={styles.title}>
+                  {event ? `Edit event` : `Add new event`}
+                </b>
+                {event && (
+                  <span className={styles.subtext}>
+                    Created at : {event.createdAt}
+                  </span>
+                )}
+                {event?.updatedAt && (
+                  <span className={styles.subtext}>
+                    Updated at : {event.updatedAt}
+                  </span>
+                )}
+                <label className={styles.label}>
+                  Title*
+                  <Field
+                    type="text"
+                    className={styles.input}
+                    name="title"
+                    // value={title}
+                    onChange={handleChange}
+                    autoFocus
+                  />
+                  {errors.title && touched.title && (
+                    <span className={styles.errorMessage}>{errors.title}</span>
+                  )}
+                </label>
+                <label className={styles.label}>
+                  Description
+                  <Field
+                    as="textarea"
+                    type="text"
+                    className={styles.descr}
+                    name="description"
+                    onChange={handleChange}
+                  />
+                </label>
+                <div className={styles.inputWrap}>
+                  <label className={styles.label}>
+                    <span className={styles.subtitle}>Date*</span>
+                    <DatePicker
+                      className={styles.inputDate}
+                      selected={date}
+                      onChange={selectedDate => setDate(selectedDate)}
+                      required
+                    />
+                    {errors.date && touched.date && (
+                      <span className={styles.errorMessage}>{errors.date}</span>
+                    )}
+                  </label>
+                  <label className={`${styles.label} ${styles.labelTime}`}>
+                    <span className={styles.subtitle}>Begin time</span>
+                    <svg className={styles.iconclock} width="15" height="15">
+                      <use href={`${svg}#icon-clock`}></use>
+                    </svg>
+                    <DatePicker
+                      selected={time}
+                      className={styles.inputTime}
+                      onChange={selectedTime => setTime(selectedTime)}
+                      showTimeSelect
+                      showTimeSelectOnly
+                      timeIntervals={30}
+                      timeCaption="Time"
+                      dateFormat="HH:mm"
+                    />
+                  </label>
+                </div>
+                <div className={styles.btnwrap}>
+                  {event && (
+                    <button
+                      type="button"
+                      className={styles.delBtn}
+                      onClick={() => delEvent(event.id)}
+                    >
+                      <svg className={styles.icondelete} width="20" height="20">
+                        <use href={`${svg}#icon-trash`}></use>
+                      </svg>
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
+                    disabled={!values.title || !date || !isValid}
+                  >
+                    SAVE
+                  </button>
+                </div>
+              </Form>
+            );
+          }}
+        </Formik>
       </div>
     </div>,
     document.body

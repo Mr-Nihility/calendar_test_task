@@ -124,6 +124,9 @@
   border: 1px solid #328989;
   background-color: #fff;
 }
+.submitBtn:disabled {
+  filter: grayscale();
+}
 
 .submitBtn:invalid {
   background-color: transparent;
@@ -164,4 +167,7 @@
 
 .labelTime:hover .iconclock {
   fill: royalblue;
+}
+.errorMessage {
+  color: #ed5e3d;
 }
