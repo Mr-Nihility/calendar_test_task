@@ -1,5 +1,6 @@
 .wrapper {
   display: flex;
+  margin-left: auto;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -24,5 +25,8 @@
   font-weight: 700;
 }
 
-.date {
+.monthText {
+  text-align: center;
+  min-width: 80px;
+  font-weight: 700;
 }

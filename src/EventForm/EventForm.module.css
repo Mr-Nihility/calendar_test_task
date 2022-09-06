@@ -47,17 +47,26 @@
 
 .label {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
+  color: #ababab;
   margin-bottom: 20px;
 }
 .subtitle {
-  font-size: 12px;
+  font-size: 13px;
+  color: #ababab;
   display: block;
+  margin-bottom: 10px;
+}
+.subtext {
+  font-size: 10px;
+  color: #ababab;
+  display: block;
+  margin-bottom: 10px;
 }
 .inputWrap {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 13px;
   margin-bottom: 80px;
 }
 
@@ -71,6 +80,7 @@
   background-color: inherit;
   color: inherit;
   outline: none;
+  color: var(--text-color);
   border: 1px solid transparent;
   border-bottom: 1px solid var(--text-color);
 }

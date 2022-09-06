@@ -4,6 +4,8 @@ import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import { nanoid } from 'nanoid';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
+import { getSelectedDate } from 'redux/events/events-selectors';
 window.moment = moment;
 //------------------------------------------//
 export default function EventForm({
@@ -12,18 +14,22 @@ export default function EventForm({
   event = null,
   delEvent = null,
 }) {
+  const selectedDate = useSelector(getSelectedDate);
   //state
   const [title, setTitle] = useState(event ? event.title : '');
   const [description, setDescription] = useState(
     event ? event.description : ''
   );
 
-  const [date, setDate] = useState(event ? new Date(event.date) : new Date());
+  const [date, setDate] = useState(
+    event ? new Date(event.date) : new Date(selectedDate)
+  );
 
   const [time, setTime] = useState(
-    event ? new Date(moment(`${event.date} ${event.time}`)) : new Date()
+    event
+      ? new Date(moment(`${event.date} ${event.time}`))
+      : new Date(selectedDate)
   );
-  //dispatch
 
   //use 1
   useEffect(() => {
@@ -43,10 +49,6 @@ export default function EventForm({
       onClose();
     }
   };
-  //use 2
-  // useEffect(() => {
-
-  // }, [])
 
   const handlerChange = e => {
     const { name, value } = e.target;
@@ -73,7 +75,9 @@ export default function EventForm({
       id: event ? event.id : nanoid(),
     };
     console.log(eventData);
+
     handlerForm(eventData);
+    onClose();
   };
 
   return ReactDOM.createPortal(
@@ -85,12 +89,12 @@ export default function EventForm({
         <form className={styles.form} onSubmit={handlerSubmit}>
           <b className={styles.title}>Add new event</b>
           {event && (
-            <span className={styles.subtitle}>
+            <span className={styles.subtext}>
               Created at : {event.createdAt}
             </span>
           )}
           {event?.updatedAt && (
-            <span className={styles.subtitle}>
+            <span className={styles.subtext}>
               Updated at : {event.updatedAt}
             </span>
           )}
@@ -102,6 +106,7 @@ export default function EventForm({
               name="title"
               value={title}
               onChange={handlerChange}
+              required
             />
           </label>
           <label className={styles.label}>
@@ -122,6 +127,7 @@ export default function EventForm({
                 selected={date}
                 // dateFormat="MM/dd/yyyy"
                 onChange={selectedDate => setDate(selectedDate)}
+                required
               />
             </label>
             <label>

@@ -4,12 +4,12 @@ import DatePickerSection from '../DatePickerSection/DatePickerSection';
 import EventForm from '../EventForm/EventForm';
 import styles from './Header.module.css';
 import { useDispatch } from 'react-redux';
-import { addEvent } from '../redux/events/events-slice';
+import { addEvent, updateDate } from '../redux/events/events-slice';
+import moment from 'moment/moment';
 
 //---------------------------------------------------------------------------//
 export default function Header() {
   const dispatch = useDispatch();
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const handlOpen = () => {
     setModalIsOpen(true);
@@ -21,9 +21,14 @@ export default function Header() {
   const addSubmit = data => {
     dispatch(addEvent(data));
   };
+
+  const goTodayHandler = () => {
+    dispatch(updateDate(moment().format('MM/DD/YYYY')));
+  };
+
   return (
     <header className={styles.header}>
-      <ButtonAddIvent handler={handlOpen} />
+      <ButtonAddIvent handler={handlOpen} goTodayHandler={goTodayHandler} />
       {modalIsOpen && (
         <EventForm onClose={handlClose} handlerForm={addSubmit} />
       )}

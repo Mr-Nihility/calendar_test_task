@@ -58,7 +58,8 @@ export default function CalendarCell({ event, i }) {
         className={styles.eventItem}
         onClick={openModalForm}
       >
-        {event.title}
+        <span> {event.title}</span>
+        <span>{event.time}</span>
       </li>
     </>
   );
