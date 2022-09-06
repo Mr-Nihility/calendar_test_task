@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/calendar_test_task/static/css/main.5d22e5e4.css",
+    "main.js": "/calendar_test_task/static/js/main.c6f807f9.js",
+    "static/js/787.ff30da8c.chunk.js": "/calendar_test_task/static/js/787.ff30da8c.chunk.js",
+    "index.html": "/calendar_test_task/index.html",
+    "main.5d22e5e4.css.map": "/calendar_test_task/static/css/main.5d22e5e4.css.map",
+    "main.c6f807f9.js.map": "/calendar_test_task/static/js/main.c6f807f9.js.map",
+    "787.ff30da8c.chunk.js.map": "/calendar_test_task/static/js/787.ff30da8c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5d22e5e4.css",
+    "static/js/main.c6f807f9.js"
+  ]
+}
