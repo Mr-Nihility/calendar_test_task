@@ -32,11 +32,9 @@ const eventsSlice = createSlice({
       });
     },
     deleteEvent: (state, { payload }) => {
-      console.log(payload);
       state.events = state.events.filter(item => item.id !== payload);
     },
     updateDate: (state, { payload }) => {
-      console.log(payload);
       //'MM/DD/YYYY'
       state.selectedDate = payload;
     },

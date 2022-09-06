@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { getSelectedDate } from 'redux/events/events-selectors';
-window.moment = moment;
+import svg from '../assets/icons.svg';
 //------------------------------------------//
 export default function EventForm({
   onClose,
@@ -20,11 +20,9 @@ export default function EventForm({
   const [description, setDescription] = useState(
     event ? event.description : ''
   );
-
   const [date, setDate] = useState(
     event ? new Date(event.date) : new Date(selectedDate)
   );
-
   const [time, setTime] = useState(
     event
       ? new Date(moment(`${event.date} ${event.time}`))
@@ -84,7 +82,9 @@ export default function EventForm({
     <div className={styles.backdrop} onClick={handleOnBackDrop}>
       <div className={styles.modal}>
         <button type="button" className={styles.clsBtn} onClick={onClose}>
-          X
+          <svg className={styles.icon} width="15" height="15">
+            <use href={`${svg}#icon-close`}></use>
+          </svg>
         </button>
         <form className={styles.form} onSubmit={handlerSubmit}>
           <b className={styles.title}>Add new event</b>
@@ -120,7 +120,7 @@ export default function EventForm({
             />
           </label>
           <div className={styles.inputWrap}>
-            <label>
+            <label className={styles.label}>
               <span className={styles.subtitle}>Date*</span>
               <DatePicker
                 className={styles.inputDate}
@@ -130,8 +130,11 @@ export default function EventForm({
                 required
               />
             </label>
-            <label>
+            <label className={`${styles.label} ${styles.labelTime}`}>
               <span className={styles.subtitle}>Begin time</span>
+              <svg className={styles.iconclock} width="15" height="15">
+                <use href={`${svg}#icon-clock`}></use>
+              </svg>
               <DatePicker
                 selected={time}
                 className={styles.inputTime}
@@ -151,7 +154,9 @@ export default function EventForm({
                 className={styles.delBtn}
                 onClick={() => delEvent(event.id)}
               >
-                del
+                <svg className={styles.icondelete} width="20" height="20">
+                  <use href={`${svg}#icon-trash`}></use>
+                </svg>
               </button>
             )}
             <button type="submit" className={styles.submitBtn}>

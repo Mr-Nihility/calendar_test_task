@@ -6,6 +6,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateDate } from 'redux/events/events-slice';
 import { getSelectedDate } from 'redux/events/events-selectors';
+import svg from '../assets/icons.svg';
 //-------------------------------------------------------------//
 export default function DatePickerSection() {
   const currentDate = useSelector(getSelectedDate);
@@ -38,7 +39,9 @@ export default function DatePickerSection() {
     <div className={styles.wrapper}>
       <div className={styles.month}>
         <button type="button" className={styles.btn} onClick={prevMonth}>
-          {'<'}
+          <svg className={styles.iconArrow} width="15" height="15">
+            <use href={`${svg}#arrow-back`}></use>
+          </svg>
         </button>
         <p className={styles.monthText}>
           {selectedDate
@@ -46,17 +49,26 @@ export default function DatePickerSection() {
             : moment(new Date()).format('MMMM')}
         </p>
         <button type="button" className={styles.btn} onClick={nextMonth}>
-          {'>'}
+          <svg className={styles.iconArrow} width="15" height="15">
+            <use href={`${svg}#arrow-forward`}></use>
+          </svg>
         </button>
       </div>
-      <DatePicker
-        // dateFormat="yyyy.MM.dd"
-        selected={selectedDate ? selectedDate : new Date()}
-        onChange={setDateToStore}
-        // placeholderText={"MM-DD-YYYY"}
-        showYearDropdown
-        scrollableYearDropdown
-      />
+      <div className={styles.calendarBox}>
+        <svg className={styles.iconCalendar} width="15" height="10">
+          <use href={`${svg}#icon-calendar`}></use>
+        </svg>
+        <DatePicker
+          // dateFormat="yyyy.MM.dd"
+
+          selected={selectedDate ? selectedDate : new Date()}
+          className={styles.datePicker}
+          onChange={setDateToStore}
+          placeholderText={''}
+          showYearDropdown
+          scrollableYearDropdown
+        />
+      </div>
     </div>
   );
 }

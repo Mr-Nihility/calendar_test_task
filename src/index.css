@@ -38,3 +38,12 @@ ol,
 ul {
   list-style: none;
 }
+
+.react-datepicker-ignore-onclickoutside {
+  outline: none;
+  border: transparent;
+}
+
+.react-datepicker__input-container {
+  position: static;
+}
