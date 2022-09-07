@@ -54,7 +54,6 @@ export default function EventForm({
       description: description.value,
       date: moment(date).format('MM/DD/YYYY'),
       time: moment(time).format('HH:mm'),
-
       id: event ? event.id : nanoid(),
     };
     handlerForm(eventData);
