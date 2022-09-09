@@ -1,17 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  events: [
-    {
-      createdAt: '6.9.2022 17:04',
-      date: '09/09/2022',
-      description:
-        'Привіт! Мене звати Волидимир. Дякую за можливість виконати тестове завдання. Гарного і мирного дня ♥ ',
-      id: '92VqtsNLTyNlvTd402rcM',
-      time: '06:30',
-      title: 'Привіт! 👋 ',
-    },
-  ],
+  events: [],
   selectedDate: null,
 };
 
