@@ -11,9 +11,11 @@ import moment from 'moment/moment';
 export default function Header() {
   const dispatch = useDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const handlOpen = () => {
     setModalIsOpen(true);
   };
+
   const handlClose = () => {
     setModalIsOpen(false);
   };
