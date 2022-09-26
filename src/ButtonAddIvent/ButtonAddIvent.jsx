@@ -1,9 +1,12 @@
-import React from 'react';
+
 import styles from './ButtonAddIvent.module.css';
 
 import svg from '../assets/icons.svg';
 //--------------------------------------------------//
-export default function ButtonAddIvent({ handler, goTodayHandler }) {
+export default function ButtonAddEvent({ handler, goTodayHandler }) {
+
+
+
   return (
     <>
       <button type="button" className={styles.btn} onClick={handler}>

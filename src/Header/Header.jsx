@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ButtonAddIvent from '../ButtonAddIvent/ButtonAddIvent';
+import ButtonAddEvent from '../ButtonAddIvent/ButtonAddIvent';
 import DatePickerSection from '../DatePickerSection/DatePickerSection';
 import EventForm from '../EventForm/EventForm';
 import styles from './Header.module.css';
@@ -12,11 +12,11 @@ export default function Header() {
   const dispatch = useDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handlOpen = () => {
+  const handleOpen = () => {
     setModalIsOpen(true);
   };
 
-  const handlClose = () => {
+  const handleClose = () => {
     setModalIsOpen(false);
   };
 
@@ -31,9 +31,9 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <ButtonAddIvent handler={handlOpen} goTodayHandler={goTodayHandler} />
+      <ButtonAddEvent handler={handleOpen} goTodayHandler={goTodayHandler} />
       {modalIsOpen && (
-        <EventForm onClose={handlClose} handlerForm={addSubmit} />
+        <EventForm onClose={handleClose} handlerForm={addSubmit} />
       )}
       <DatePickerSection />
     </header>
